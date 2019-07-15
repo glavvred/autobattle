@@ -11,7 +11,7 @@ public class SideController
 
 public class Side : MonoBehaviour
 {
-    private float zPos;
+    private float yPos;
     public List<Fleet> fleets;
 
     public GameObject Create(JSONNode side)
@@ -20,18 +20,10 @@ public class Side : MonoBehaviour
         GameObject SideGo = Instantiate(prefab) as GameObject;
         SideGo.name = "Side" + SideController.Sides.Count;
         SideGo.transform.parent = transform;
-
-        if (SideController.Sides.Count <= 1)
-            zPos = -6f;
-        if (SideController.Sides.Count == 2)
-            zPos = 3f;
-        if (SideController.Sides.Count == 3)
-            zPos = 8f;
-
-        SideGo.transform.position = new Vector3(transform.position.x, transform.position.y + 2, zPos);
         SideController.Sides.Add(this);
 
-        Debug.Log(SideController.Sides.Count);
+        float startPositionZ = - transform.localScale.y / 2;
+        SideGo.transform.position = new Vector3(0 , 0, startPositionZ - 1f + SideController.Sides.Count * 4f);
 
         return SideGo;
     }
