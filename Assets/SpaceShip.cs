@@ -35,7 +35,7 @@ public class SpaceShip : MonoBehaviour
         GameObject canvasGo = new GameObject();
         canvasGo.name = "ShipCanvas";
         canvasGo.AddComponent<Canvas>();
-        canvasGo.transform.parent = transform;
+        canvasGo.GetComponent<RectTransform>().SetParent(transform, true);
         canvasGo.transform.LookAt(Camera.main.transform); 
         canvasGo.transform.localPosition = new Vector3(0, 1.0f, -2.5f);
         canvasGo.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);

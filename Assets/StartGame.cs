@@ -7,7 +7,8 @@ public class StartGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var ip = new InputParser();
+        //я бы прям тут всю загрузку и делал
+        var ip = new InputParser(this.gameObject);
         ip.JsonParse();
     }
 
