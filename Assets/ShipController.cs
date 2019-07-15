@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public static class ShipsController
 {
@@ -10,4 +11,5 @@ public static class ShipsController
             (ship.shipSize == attacker.bestTarget.Item1 && ship.shipArmor == attacker.bestTarget.Item2));
         return result;
     }
+
 }

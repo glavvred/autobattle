@@ -7,12 +7,12 @@ using System;
 public class SideController
 {
     public static List<Side> Sides = new List<Side>();
-
 }
 
 public class Side : MonoBehaviour
 {
     private float zPos;
+    public List<Fleet> fleets;
 
     public GameObject Create(JSONNode side)
     {
@@ -21,14 +21,12 @@ public class Side : MonoBehaviour
         SideGo.name = "Side" + SideController.Sides.Count;
         SideGo.transform.parent = transform;
 
-        if (SideController.Sides.Count < 2)
-        {
+        if (SideController.Sides.Count <= 1)
             zPos = -6f;
-        }
-        else
-        {
+        if (SideController.Sides.Count == 2)
             zPos = 3f;
-        }
+        if (SideController.Sides.Count == 3)
+            zPos = 8f;
 
         SideGo.transform.position = new Vector3(transform.position.x, transform.position.y + 2, zPos);
         SideController.Sides.Add(this);

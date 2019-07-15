@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-
 public interface IShip
 {
     void TakeDamage();
