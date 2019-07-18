@@ -35,7 +35,7 @@ public class ShipGenerator : MonoBehaviour
             GameObject go = Instantiate(prefab) as GameObject;
             go.transform.parent = transform;
             go.transform.position = new Vector3(xPos, transform.position.y + 1, zPos);
-            go.GetComponent<SpaceShip>().shipSide = shipSide;
+
 
             //            GameObject ship = Instantiate(shipInterceptor, startPosition, Quaternion.identity);
             //            ship.GetComponent<BattleSide>().side = BattleSide.Side.Blue;

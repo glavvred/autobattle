@@ -6,26 +6,30 @@ using System;
 
 public class Fleet : MonoBehaviour
 {
-    private int FleetSide;
-
-    public GameObject Create(GameObject SideObject, JSONNode side)
+    public GameObject Create(GameObject SideObject, JSONNode BattleFleet , int FleetCount, int CurrentNumber)
     {
         GameObject prefab = Resources.Load("Misc/FleetBox") as GameObject;
         GameObject FleetGo = Instantiate(prefab) as GameObject;
-        FleetGo.name = "Fleet " + SideController.Sides.Count + " : " + SideController.Sides[side["id"]].fleets.Count;
-        FleetGo.transform.parent = transform;
+        
+        FleetGo.name = "Fleet " + CurrentNumber  + "(" + BattleFleet["id"] + ")";
+        FleetGo.transform.parent = SideObject.transform;
 
-        FleetGo.transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
-        SideController.Sides[side["id"]].fleets.Add(this);
-        FleetSide = side["id"];
+        float zPos;
+        if (CurrentNumber % 2 == 0)
+        {
+            zPos = 1f;
+        }
+        else
+        {
+            zPos = -1f;
+        }
+        FleetGo.transform.position = new Vector3(-3.3f + SideObject.transform.position.x + 4f * CurrentNumber, 0.01f, SideObject.transform.position.z + zPos);
 
+        Side.Fleets.Add(this);
+ 
         return FleetGo;
     }
 
-    public void Update()
-    {
-       
-        }
 }
 
 
