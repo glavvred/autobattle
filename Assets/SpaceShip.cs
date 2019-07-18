@@ -59,29 +59,24 @@ public class SpaceShip : MonoBehaviour
 
     private void Update()
     {
+        //TODO: лучше не использовать Update вообще. Любой объект с коллайдером генерит события onClicked
 
         //unit select
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0)) return;
+        if (Camera.main != null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
+            var isHit = Physics.Raycast(ray, out var hitInfo, Mathf.Infinity);
 
-            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
-            {
-                foreach (Transform child in transform)
-                {
-                    if (child.gameObject.tag == "Highlight") {
-                        MeshRenderer mr = child.gameObject.GetComponent<MeshRenderer>();
-                        if (mr.sharedMaterial == selected)
-                        {
-                            mr.material = unselected;
-                        }
-                        else
-                            mr.material = selected;
-                        //тут еще нужно юниту поставить признак какой то, выбран он или нет
-                    }
-                }
-            }
+            if (!isHit || hitInfo.collider.gameObject != this.gameObject) return;
+        }
+
+        foreach (Transform child in transform)
+        {
+            if (!child.gameObject.CompareTag("Highlight")) continue;
+            MeshRenderer mr = child.gameObject.GetComponent<MeshRenderer>();
+            mr.material = mr.sharedMaterial == selected ? unselected : selected;
+            //тут еще нужно юниту поставить признак какой то, выбран он или нет
         }
     }
 
