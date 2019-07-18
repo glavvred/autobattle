@@ -37,8 +37,6 @@ public class InputParser
                 int ShipInFleet = 0;
                 foreach (JSONNode ship in BattleFleet["ships"])
                 {
-                    //Debug.Log("id : " + ship["shipId"] + "name : " + ship["name"]);
-                    
                     //корабли внутри флота
                     var _spaceShip = fleetObject.AddComponent<SpaceShip>();
                     GameObject shipObject = ShipsController.Create(fleetObject, ship, shipQuantity, ShipInFleet);

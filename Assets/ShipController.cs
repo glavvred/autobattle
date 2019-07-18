@@ -106,8 +106,6 @@ public static class ShipsController
         ShipCurrentArmorText.fontSize = 15;
         ShipCurrentArmorText.color = Color.white;
         
-
-        Debug.Log(ship["armorType"].ToString());
         go.GetComponent<SpaceShip>().shipArmor = (SpaceShip.Armor)Enum.Parse(typeof(SpaceShip.Armor), "Light");
 
         return go;

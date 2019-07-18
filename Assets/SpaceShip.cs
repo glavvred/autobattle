@@ -32,8 +32,8 @@ public class SpaceShip : MonoBehaviour
     
     void Start()
     {
-        unselected = Resources.Load("Transparent", typeof(Material)) as Material;
-        selected = Resources.Load("type1", typeof(Material)) as Material;
+        unselected = Resources.Load("Materials/Transparent", typeof(Material)) as Material;
+        selected = Resources.Load("Materials/type1", typeof(Material)) as Material;
 
 
         //для демонстрации заполним массив случайным барахлом
@@ -60,6 +60,7 @@ public class SpaceShip : MonoBehaviour
     private void Update()
     {
 
+        //unit select
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -69,25 +70,19 @@ public class SpaceShip : MonoBehaviour
             {
                 foreach (Transform child in transform)
                 {
-                    Debug.Log(child.tag + " "+ (child.tag == "Highlight"));
-                    //вот как это блин?
-                    if (child.tag == "Highlight") {
-                        Renderer highlightRend = child.gameObject.GetComponent<Renderer>();
-                        Debug.Log(highlightRend.material);
-                        Debug.Log(selected);
-
-                        if (highlightRend.material == selected)
+                    if (child.gameObject.tag == "Highlight") {
+                        MeshRenderer mr = child.gameObject.GetComponent<MeshRenderer>();
+                        if (mr.sharedMaterial == selected)
                         {
-                            highlightRend.material = unselected;
+                            mr.material = unselected;
                         }
                         else
-                            highlightRend.material = selected;
+                            mr.material = selected;
+                        //тут еще нужно юниту поставить признак какой то, выбран он или нет
                     }
                 }
-                Debug.Log("hit");
             }
         }
-        //GetComponent<MeshRenderer>().material = lit;
     }
 
     //Метод для поиска лучшей цели
